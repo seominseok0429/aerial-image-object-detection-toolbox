@@ -85,3 +85,7 @@ if __name__ == '__main__':
     loader = DOTA_loader()
     #loader = torch.utils.data.DataLoader(loader, batch_size=1, shuffle=True, num_workers=2)
     for idx, (img, label) in enumerate(loader):
+        for i in label:
+            img = cv2.rectangle(img, (int(i[0]), int(i[2])), (int(i[1]), int(i[3])), (0, 0, 255), 2)
+        cv2.imwrite('a.png', img)
+        break
