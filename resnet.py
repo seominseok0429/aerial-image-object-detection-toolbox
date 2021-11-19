@@ -127,21 +127,20 @@ class ResNet(nn.Module):
         x = self.conv1(x)
         x = self.bn1(x)
         x = self.relu(x)
-        x = self.maxpool(x)
-
-        x = self.layer1(x)
-        x = self.layer2(x)
-        x = self.layer3(x)
-        x = self.layer4(x)
         
+        c1 = self.maxpool(x)
+        c2 = self.layer1(c1)
+        c3 = self.layer2(c2)
+        c4 = self.layer3(c3)
+        c5 = self.layer4(c4)
+
+        return [c1, c2, c3, c4, c5]
+    
 if __name__ == '__main__':
     model = ResNet(depth=50)
     inputs = torch.randn(1,3,224,224)
     output = model(inputs)
-    print(output.shape)
-        x = self.avgpool(x)
-        x = x.view(x.size(0), -1)
-        x = self.fc(x)
-        return x
+    for i in output:
+        print(i.shape)
       
   
